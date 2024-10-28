@@ -108,9 +108,12 @@ def main():
         for name in files:
             print(os.path.join(root, name))
     json_file = 'artifact/statistics.json'  # Update with the actual JSON file path inside the unzipped directory
-    csv_file = '/output.csv'
+    csv_file = 'output.csv'
     
     json_to_csv(json_file, csv_file)
+
+    if not os.path.exists(csv_file):
+        raise Exception(f"csv file not found after conversion : {csv_file}")
     
     upload_to_s3(csv_file, S3_BUCKET_NAME, S3_KEY)
 
