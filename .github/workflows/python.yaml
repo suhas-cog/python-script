@@ -73,7 +73,7 @@ jobs:
         aws-region: us-east-1
 
     - name: Github token
-      run: echo "GITHUB_TOKEN=${{ secrets.GH_TOKEN }}"
+      run: echo "MY_GITHUB_TOKEN=${{ secrets.MY_GITHUB_TOKEN }}" >> $GITHUB_ENV
   # Run python script to convert .json to .csv
     - name: Run python script
       run: |

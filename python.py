@@ -8,7 +8,7 @@ import boto3
 from botocore.config import Config
 
 # Constants
-GITHUB_TOKEN = os.getenv('GITHUB_TOKEN')
+GITHUB_TOKEN = os.getenv('MY_GITHUB_TOKEN')
 REPO_OWNER = 'suhas-cog'
 REPO_NAME = 'python-script'
 ARTIFACT_NAME = 'jmeter-html-reports'
