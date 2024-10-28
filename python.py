@@ -20,7 +20,7 @@ def get_artifact_id():
     url = f'https://api.github.com/repos/{REPO_OWNER}/{REPO_NAME}/actions/artifacts'
     headers = {'Authorization': f'token {GITHUB_TOKEN}'}
     response = requests.get(url, headers=headers)
-    artifacts = response.json()['artifacts']
+    artifacts = response.json()['jmeter-html-reports']
     for artifact in artifacts:
         if artifact['name'] == ARTIFACT_NAME:
             return artifact['id']
