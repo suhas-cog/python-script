@@ -45,12 +45,12 @@ def download_artifact(artifact_id):
     if response.status_code != 200:
         raise Exception(f"Failed to download artifact: {response.status_code} {response.text}")
     
-    with open('artifact.zip', 'wb') as f:
+    with open('jmeter-html-reports', 'wb') as f:
         f.write(response.content)
 
 # Step 3: Unzip the downloaded artifact
 def unzip_artifact():
-    with zipfile.ZipFile('artifact.zip', 'r') as zip_ref:
+    with zipfile.ZipFile('jmeter-html-reports.zip', 'r') as zip_ref:
         zip_ref.extractall('artifact')
 
 # Step 4: Convert JSON to CSV
