@@ -108,7 +108,7 @@ def main():
         for name in files:
             print(os.path.join(root, name))
     json_file = 'artifact/statistics.json'  # Update with the actual JSON file path inside the unzipped directory
-    csv_file = 'output.csv'
+    csv_file = '/output.csv'
     
     json_to_csv(json_file, csv_file)
     
