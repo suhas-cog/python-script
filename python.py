@@ -93,7 +93,7 @@ def main():
         download_artifact(artifact_id)
         unzip_artifact()
         
-        json_file = 'jmeter-html-reports/statistics.json'  # Update with the actual JSON file path inside the unzipped directory
+        json_file = 'artifact/statistics.json'  # Update with the actual JSON file path inside the unzipped directory
         csv_file = 'output.csv'
         
         json_to_csv(json_file, csv_file)
