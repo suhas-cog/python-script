@@ -28,5 +28,4 @@ jobs:
 
     - name: run script
       run: |
-        python as_python.py
-      
+        python as_mishra.py
