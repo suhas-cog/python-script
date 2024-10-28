@@ -74,22 +74,26 @@ def json_to_csv(json_file, csv_file):
     
     with open(json_file, 'r') as f:
         data = json.load(f)
-
-    #Debugging: Print the contents of the JSON data
+    
+    # Debugging: Print the contents of the JSON data
     print("Contents of the JSON data:")
-    print (data)
-
-    if not isinstance(data, list) or not data:
-        raise Exception("JSON data is not a list or is empty.")
+    print(json.dumps(data, indent=4))  # Pretty-print the JSON data
+    
+    if not isinstance(data, dict) or not data:
+        raise Exception("JSON data is not a dictionary or is empty.")
+    
+    # Extract the keys for the CSV header
+    headers = list(data[next(iter(data))].keys())
     
     with open(csv_file, 'w', newline='') as f:
         writer = csv.writer(f)
-        writer.writerow(data[0].keys())  # Write CSV header
-        for row in data:
-            writer.writerow(row.values())
+        writer.writerow(['transaction'] + headers)  # Write CSV header
+        
+        for key, value in data.items():
+            writer.writerow([key] + list(value.values()))
     
     print("JSON converted to CSV successfully.")
-
+    
 # Step 5: Upload the CSV to AWS S3
 def upload_to_s3(file_name, bucket, key):
     if not os.path.exists(file_name):
