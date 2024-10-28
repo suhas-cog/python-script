@@ -66,7 +66,7 @@ def json_to_csv(json_file, csv_file):
 
 # Step 5: Upload the CSV to AWS S3
 def upload_to_s3(file_name, bucket, key):
-    s3 = boto3.client('s3', config=Config(region_name='us-west-2'))
+    s3 = boto3.client('s3', config=Config(region_name='us-east-1'))
     s3.upload_file(file_name, bucket, key)
 
 # Main function
