@@ -11,7 +11,7 @@ from botocore.config import Config
 GITHUB_TOKEN = os.getenv('MY_GITHUB_TOKEN')
 REPO_OWNER = 'suhas-cog'
 REPO_NAME = 'python-script'
-ARTIFACT_NAME = 'HTMLReport'
+ARTIFACT_NAME = 'jmeter-html-reports'
 S3_BUCKET_NAME = 'github-csv'
 S3_KEY = '/output.csv'
 
@@ -93,7 +93,7 @@ def main():
         download_artifact(artifact_id)
         unzip_artifact()
         
-        json_file = 'artifact/jmeter-html-reports/statistics.json'  # Update with the actual JSON file path inside the unzipped directory
+        json_file = 'jmeter-html-reports/statistics.json'  # Update with the actual JSON file path inside the unzipped directory
         csv_file = 'output.csv'
         
         json_to_csv(json_file, csv_file)
