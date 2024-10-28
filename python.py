@@ -76,7 +76,7 @@ def main():
         download_artifact(artifact_id)
         unzip_artifact()
         
-        json_file = 'artifact/statistics.json'  # Update with the actual JSON file path
+        json_file = 'artifact/jmeter-html-reports/statistics.json'  # Update with the actual JSON file path
         csv_file = 'output.csv'
         
         json_to_csv(json_file, csv_file)
