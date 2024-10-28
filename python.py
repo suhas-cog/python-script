@@ -13,7 +13,7 @@ REPO_OWNER = 'suhas-cog'
 REPO_NAME = 'python-script'
 ARTIFACT_NAME = 'jmeter-html-reports'
 S3_BUCKET_NAME = 'github-csv'
-S3_KEY = 'output.csv'
+#S3_KEY = 'output.csv'
 
 
 def get_artifact_id():
@@ -80,7 +80,7 @@ def main():
         csv_file = 'output.csv'
         
         json_to_csv(json_file, csv_file)
-        upload_to_s3(csv_file, S3_BUCKET_NAME, S3_KEY)
+        upload_to_s3(csv_file, S3_BUCKET_NAME)
     except Exception as e:
         print(f"Error: {e}")
 
