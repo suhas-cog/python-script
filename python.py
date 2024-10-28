@@ -11,9 +11,9 @@ from botocore.config import Config
 GITHUB_TOKEN = os.getenv('MY_GITHUB_TOKEN')
 REPO_OWNER = 'suhas-cog'
 REPO_NAME = 'python-script'
-ARTIFACT_NAME = 'jmeter-html-reports'
+ARTIFACT_NAME = 'HTMLReport'
 S3_BUCKET_NAME = 'github-csv'
-#S3_KEY = 'output.csv'
+S3_KEY = '/output.csv'
 
 
 def get_artifact_id():
@@ -45,16 +45,26 @@ def download_artifact(artifact_id):
     if response.status_code != 200:
         raise Exception(f"Failed to download artifact: {response.status_code} {response.text}")
     
-    with open('jmeter-html-reports', 'wb') as f:
+    with open('jmeter-html-reports', 'wb') as f:  # No .zip extension
         f.write(response.content)
+    
+    print("Artifact downloaded successfully.")
 
 # Step 3: Unzip the downloaded artifact
 def unzip_artifact():
-    with zipfile.ZipFile('jmeter-html-reports.zip', 'r') as zip_ref:
+    if not os.path.exists('jmeter-html-reports'):
+        raise Exception("Artifact file not found.")
+    
+    with zipfile.ZipFile('jmeter-html-reports', 'r') as zip_ref:
         zip_ref.extractall('artifact')
+    
+    print("Artifact unzipped successfully.")
 
 # Step 4: Convert JSON to CSV
 def json_to_csv(json_file, csv_file):
+    if not os.path.exists(json_file):
+        raise Exception(f"JSON file not found: {json_file}")
+    
     with open(json_file, 'r') as f:
         data = json.load(f)
     
@@ -63,11 +73,18 @@ def json_to_csv(json_file, csv_file):
         writer.writerow(data[0].keys())  # Write CSV header
         for row in data:
             writer.writerow(row.values())
+    
+    print("JSON converted to CSV successfully.")
 
 # Step 5: Upload the CSV to AWS S3
 def upload_to_s3(file_name, bucket, key):
+    if not os.path.exists(file_name):
+        raise Exception(f"CSV file not found: {file_name}")
+    
     s3 = boto3.client('s3', config=Config(region_name='us-east-1'))
     s3.upload_file(file_name, bucket, key)
+    
+    print("CSV uploaded to S3 successfully.")
 
 # Main function
 def main():
@@ -76,11 +93,12 @@ def main():
         download_artifact(artifact_id)
         unzip_artifact()
         
-        json_file = 'artifact/jmeter-html-reports/statistics.json'  # Update with the actual JSON file path
+        json_file = 'artifact/jmeter-html-reports/statistics.json'  # Update with the actual JSON file path inside the unzipped directory
         csv_file = 'output.csv'
         
         json_to_csv(json_file, csv_file)
-        upload_to_s3(csv_file, S3_BUCKET_NAME)
+        
+        upload_to_s3(csv_file, S3_BUCKET_NAME, S3_KEY)
     except Exception as e:
         print(f"Error: {e}")
 
