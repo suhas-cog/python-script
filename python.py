@@ -59,10 +59,6 @@ def unzip_artifact():
         zip_ref.extractall('artifact')
     
     print("Artifact unzipped successfully.")
-    print("Contents of the 'artifact' directory after unzipping:")
-    for root, dirs, files in os.walk('artifact'):
-        for name in files:
-            print(os.path.join(root, name))
 
 # Step 4: Find the JSON file inside the unzipped artifact directory
 # def find_json_file(directory, filename):
@@ -78,6 +74,13 @@ def json_to_csv(json_file, csv_file):
     
     with open(json_file, 'r') as f:
         data = json.load(f)
+
+    #Debugging: Print the contents of the JSON data
+    print("Contents of the JSON data:")
+    print (data)
+
+    if not isinstance(data, list) or not data:
+        raise Exception("JSON data is not a list or is empty.")
     
     with open(csv_file, 'w', newline='') as f:
         writer = csv.writer(f)
@@ -103,10 +106,6 @@ def main():
     download_artifact(artifact_id)
     unzip_artifact()
     
-    print("Contents of the 'artifact' directory:")
-    for root, dirs, files in os.walk('artifact'):
-        for name in files:
-            print(os.path.join(root, name))
     json_file = 'artifact/statistics.json'  # Update with the actual JSON file path inside the unzipped directory
     csv_file = 'output.csv'
     
