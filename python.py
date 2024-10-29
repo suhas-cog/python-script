@@ -13,7 +13,7 @@ REPO_OWNER = 'suhas-cog'
 REPO_NAME = 'python-script'
 ARTIFACT_NAME = 'jmeter-html-reports'
 S3_BUCKET_NAME = 'github-csv'
-S3_KEY = '/output.csv'
+S3_KEY = 'Performance_test/output.csv'
 
 
 def get_artifact_id():
@@ -82,18 +82,36 @@ def json_to_csv(json_file, csv_file):
     if not isinstance(data, dict) or not data:
         raise Exception("JSON data is not a dictionary or is empty.")
     
-    # Extract the keys for the CSV header
-    headers = list(data[next(iter(data))].keys())
+    # Define the CSV headers
+    headers = [
+        "Label", "Samples", "errorCount", "Error %", "Average", "Min", "Max",
+        "90% Line", "95% Line", "99% Line", "throughput", "receivedKBytesPerSec", "sentKBytesPerSec"
+    ]
     
     with open(csv_file, 'w', newline='') as f:
         writer = csv.writer(f)
-        writer.writerow(['transaction'] + headers)  # Write CSV header
+        writer.writerow(headers)  # Write CSV header
         
         for key, value in data.items():
-            writer.writerow([key] + list(value.values()))
+            row = [
+                key,
+                value.get("sampleCount", ""),
+                value.get("errorCount", ""),
+                value.get("errorPct", ""),
+                value.get("meanResTime", ""),
+                value.get("minResTime", ""),
+                value.get("maxResTime", ""),
+                value.get("pct1ResTime", ""),
+                value.get("pct2ResTime", ""),
+                value.get("pct3ResTime", ""),
+                value.get("throughput", ""),
+                value.get("receivedKBytesPerSec", ""),
+                value.get("sentKBytesPerSec", "")
+            ]
+            writer.writerow(row)
     
     print("JSON converted to CSV successfully.")
-    
+
 # Step 5: Upload the CSV to AWS S3
 def upload_to_s3(file_name, bucket, key):
     if not os.path.exists(file_name):
