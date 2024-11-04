@@ -106,6 +106,27 @@ def json_to_csv(json_file, csv_file):
     
     print("JSON converted to CSV successfully.")
 
+    with open(csv_file, 'r') as csv_file:
+        csv_reader = csv.reader(csv_file)
+        rows = list(csv_reader)
+
+        # Find the row with 'Total' in the first column
+        total_row = None
+        for i, row in enumerate(rows):
+            if row[0] == 'Total':
+                total_row = rows.pop(i)
+                break
+
+        # Append the 'Total' row at the end if it was found
+        if total_row:
+            rows.append(total_row)
+
+        # Write the updated rows back to the CSV file
+        with open(csv_file, 'w', newline='') as csv_file:
+            csv_writer = csv.writer(csv_file)
+            csv_writer.writerows(rows)
+
+
 # Step 5: Upload the CSV to AWS S3
 def upload_to_s3(file_name, bucket, key):
     if not os.path.exists(file_name):
@@ -123,7 +144,7 @@ def main():
     unzip_artifact()
     
     json_file = 'artifact/statistics.json'  # Update with the actual JSON file path inside the unzipped directory
-    csv_file = 'output.csv'
+    csv_file = 'output1.csv'
     
     json_to_csv(json_file, csv_file)
 
