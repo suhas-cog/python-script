@@ -123,8 +123,8 @@ def json_to_csv(json_file, csv_file):
 
         # Write the updated rows back to the CSV file
         with open(csv_file, 'w', newline='') as csv_file_obj:
-            csv_writer = csv.writer(csv_file_obj)
-            csv_writer.writerows(rows)
+            writer = csv.writer(csv_file_obj)
+            writer.writerows(rows)
 
 
 # Step 5: Upload the CSV to AWS S3
