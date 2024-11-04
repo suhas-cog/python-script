@@ -106,8 +106,8 @@ def json_to_csv(json_file, csv_file):
     
     print("JSON converted to CSV successfully.")
 
-    with open(csv_file, 'r') as csv_file:
-        csv_reader = csv.reader(csv_file)
+    with open(csv_file, 'r') as csv_file_obj:
+        csv_reader = csv.reader(csv_file_obj)
         rows = list(csv_reader)
 
         # Find the row with 'Total' in the first column
@@ -122,8 +122,8 @@ def json_to_csv(json_file, csv_file):
             rows.append(total_row)
 
         # Write the updated rows back to the CSV file
-        with open(csv_file, 'w', newline='') as csv_file:
-            csv_writer = csv.writer(csv_file)
+        with open(csv_file, 'w', newline='') as csv_file_obj:
+            csv_writer = csv.writer(csv_file_obj)
             csv_writer.writerows(rows)
 
 
