@@ -14,7 +14,7 @@ REPO_OWNER = 'suhas-cog'
 REPO_NAME = 'python-script'
 ARTIFACT_NAME = 'jmeter-html-reports'
 S3_BUCKET_NAME = 'github-csv'
-S3_KEY = 'Performance_test'
+S3_KEY = 'Performance'
 
 
 def get_artifact_id():
@@ -144,7 +144,7 @@ def main():
     unzip_artifact()
     
     json_file = 'artifact/statistics.json'  # Update with the actual JSON file path inside the unzipped directory
-    csv_file = 'output1.csv'
+    csv_file = 'output.csv'
     
     json_to_csv(json_file, csv_file)
 
