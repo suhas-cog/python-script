@@ -9,8 +9,9 @@ from io import BytesIO
 s3 = boto3.client('s3')
 
 # Define S3 bucket and output file key
-bucket_name = 'github-csv'
+bucket_name = 'perf-csv-bucket'
 output_key = 'comparision/TaxCal.xlsx'
+prefix= 'TaxCal'
 
 # Get the current directory of the current subfolder
 current_dir = os.path.dirname(os.path.abspath(__file__))
