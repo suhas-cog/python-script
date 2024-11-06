@@ -20,6 +20,7 @@ data3_path = os.path.join(current_dir, 'result1.jtl')
 def get_latest_files(prefix, count=2):
     response = s3.list_objects_v2(Bucket=bucket_name, Prefix=prefix)
     all_files = response.get('Contents', [])
+    print(all_files)
     sorted_files = sorted(all_files, key=lambda x: x['LastModified'], reverse=True)
     return [file['Key'] for file in sorted_files[:count]]
 
@@ -77,7 +78,7 @@ new_df1['Sum of 5xx Error Count'] = new_df1['500 Error Count'] + new_df1['501 Er
 # Drop the '500 Error Count' column from the DataFrame
 new_df1.drop(columns=['500 Error Count', '501 Error Count', '502 Error Count', '503 Error Count'], inplace=True)
 
-new_df1.columns = df1.columns.astype(str)
+#new_df1.columns = df1.columns.astype(str)
 
 new_df1 = pd.merge(new_df1, df2[['Label', '90% Line']], on='Label', how='left', validate="many_to_one")
 new_df1.rename(columns={'90% Line': '90% Line Previous Release'}, inplace=True)
