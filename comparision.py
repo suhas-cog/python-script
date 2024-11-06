@@ -10,7 +10,7 @@ output_file_key = 'Performance_test/newfile.csv'
 
 data3_url = os.path.join(current_dir, 'result1.jtl')
 # GitHub artifact URL
-#data3_url = 'result1.jtl' 'https://github.com/your-repo/your-artifact-path/result1.jtl'
+#data3_url = 'result1.jtl' #'https://github.com/your-repo/your-artifact-path/result1.jtl'
 
 # Initialize S3 client
 s3_client = boto3.client('s3')
