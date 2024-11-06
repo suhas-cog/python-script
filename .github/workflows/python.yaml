@@ -41,14 +41,14 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: jmeter-results
-        path: SampleAPIjtl.jtl
+        path: SmaplteAPIjl.jtl
         if-no-files-found: error
     # Generate an HTML Report    
     - name: Run JMeter Tests
       run: |
        ls
        jmeter -Jjmeter.reportgenerator.exporter.html.series_filter="((T[0-9] {1,3}_))" -g ./SampleAPIjtl.jtl -o ./HTMLReport
- 
+#filtered 
   # upload the HTML Reports    
     - name: Upload HTML Reports
       uses: actions/upload-artifact@v4
@@ -79,4 +79,8 @@ jobs:
       run: |
        python3 python.py
 
+    # Run python script to compare results
+    - name: Run python script
+      run: |
+       python3 comparision.py
   
