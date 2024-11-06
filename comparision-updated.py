@@ -30,7 +30,8 @@ def get_latest_prefix():
     all_files = response.get('Contents', [])
     latest_file = max(all_files, key=lambda x: x['LastModified'])
     latest_key = latest_file['Key']
-    prefix = os.path.dirname(latest_key) + '/'
+    prefix = os.path.dirname(latest_key) + 'Performance_test/'
+    print(prefix)
     return prefix
 
 # Get the prefix of the latest file
