@@ -1,13 +1,16 @@
 import pandas as pd
 import boto3
+import os
 from io import StringIO
 
+current_dir = os. path.dirname(os.path.abspath(__file__))
 # AWS S3 configuration
-s3_bucket = 'your-s3-bucket-name'
-output_file_key = 'path/to/output/TaxCal.csv'
+s3_bucket = 'github-csv'
+output_file_key = 'Performance_test/newfile.csv'
 
+data3_url = os.path.join(current_dir, 'result1.jtl')
 # GitHub artifact URL
-data3_url = 'https://github.com/your-repo/your-artifact-path/result1.jtl'
+#data3_url = 'result1.jtl' 'https://github.com/your-repo/your-artifact-path/result1.jtl'
 
 # Initialize S3 client
 s3_client = boto3.client('s3')
@@ -20,7 +23,7 @@ def get_latest_s3_keys(prefix):
     return files[0]['Key'] if len(files) > 0 else None, files[1]['Key'] if len(files) > 1 else None
 
 # Get the latest and second latest current release files
-current_release_key, previous_release_key = get_latest_s3_keys('path/to/current/TaxCal_CurrentRelease')
+current_release_key, previous_release_key = get_latest_s3_keys('Performance_test/')
 
 # Read current release data from S3
 current_release_obj = s3_client.get_object(Bucket=s3_bucket, Key=current_release_key)
