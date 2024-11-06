@@ -41,7 +41,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: jmeter-results
-        path: SampleAPIjl.jtl
+        path: SampleAPIjtl.jtl
         if-no-files-found: error
     # Generate an HTML Report    
     - name: Run JMeter Tests
