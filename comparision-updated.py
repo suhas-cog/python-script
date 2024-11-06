@@ -10,7 +10,7 @@ s3 = boto3.client('s3')
 
 # Define S3 bucket and output file key
 bucket_name = 'perf-csv-bucket'
-output_key = 'performancetestreport/TaxCal.xlsx'
+output_key = 'comparision/compare-output.xlsx'
 prefix= 'TaxCal'
 
 # Get the current directory of the current subfolder
