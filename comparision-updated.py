@@ -4,13 +4,15 @@ import openpyxl
 from openpyxl.styles import PatternFill, Font
 import boto3
 from io import BytesIO
+from datetime import datetime
 
 # Initialize the S3 client
 s3 = boto3.client('s3')
 
 # Define S3 bucket and output file key
 bucket_name = 'perf-csv-bucket'
-output_key = 'comparision/compare-output.xlsx'
+current_time = datetime.now().strftime('%Y%m%d%H%M%S')   
+output_key = f'comparision/compare-output_{current_time}.xlsx'
 prefix= 'TaxCal'
 
 # Get the current directory of the current subfolder
