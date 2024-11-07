@@ -74,6 +74,7 @@ new_df1 = pd.DataFrame({
     '503 Error Count': all_labels_with_503['count_503']
 })
 
+
 # Add the two values and store in a new column
 new_df1['Sum of 5xx Error Count'] = new_df1['500 Error Count'] + new_df1['501 Error Count'] + new_df1['502 Error Count'] + new_df1['503 Error Count']
 
