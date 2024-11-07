@@ -31,7 +31,7 @@ def get_latest_prefix():
     all_files = response.get('Contents', [])
     latest_file = max(all_files, key=lambda x: x['LastModified'])
     latest_key = latest_file['Key']
-    prefix = os.path.dirname(latest_key) + 'TaxCal'
+    prefix = os.path.dirname(latest_key) + '/'
     print(prefix)
     return prefix
 
