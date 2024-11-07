@@ -14,8 +14,6 @@ REPO_OWNER = 'suhas-cog'
 REPO_NAME = 'python-script'
 ARTIFACT_NAME = 'jmeter-html-reports'
 S3_BUCKET_NAME = 'perf-csv-bucket'
-S3_KEY = 'Performance_test/'
-
 
 def get_artifact_id():
     url = f'https://api.github.com/repos/{REPO_OWNER}/{REPO_NAME}/actions/artifacts'
@@ -155,7 +153,7 @@ def main():
     
     # Get the current date and time
     
-    s3_key = f"{S3_KEY}{current_time}.csv"
+    S3_KEY = f"Performace/TaxCal_{current_time}.csv"
     
     upload_to_s3(csv_file, S3_BUCKET_NAME, S3_KEY)
 
