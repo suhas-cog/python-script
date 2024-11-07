@@ -13,8 +13,8 @@ GITHUB_TOKEN = os.getenv('MY_GITHUB_TOKEN')
 REPO_OWNER = 'suhas-cog'
 REPO_NAME = 'python-script'
 ARTIFACT_NAME = 'jmeter-html-reports'
-S3_BUCKET_NAME = 'github-csv'
-S3_KEY = 'Performance_test/output.csv'
+S3_BUCKET_NAME = 'perf-csv-bucket'
+S3_KEY = 'Performance_test/'
 
 
 def get_artifact_id():
@@ -144,7 +144,9 @@ def main():
     unzip_artifact()
     
     json_file = 'artifact/statistics.json'  # Update with the actual JSON file path inside the unzipped directory
-    csv_file = 'output.csv'
+    
+    current_time = datetime.now().strftime('%Y%m%d%H%M%S')
+    csv_file = f'TaxCal_{current_time}.csv'
     
     json_to_csv(json_file, csv_file)
 
@@ -152,7 +154,7 @@ def main():
         raise Exception(f"csv file not found after conversion : {csv_file}")
     
     # Get the current date and time
-    current_time = datetime.now().strftime('%Y%m%d%H%M%S')
+    
     s3_key = f"{S3_KEY}{current_time}.csv"
     
     upload_to_s3(csv_file, S3_BUCKET_NAME, S3_KEY)
