@@ -34,14 +34,14 @@ jobs:
     - name: Run JMeter Tests
       run: |
        ls
-       jmeter -n -t ./SampleAPI.jmx -Jpath=api/users?page=1 -Jduration=110 -Jusers=10 -Jrampup=10 -l ./SampleAPIjtl.jtl
+       jmeter -n -t ./SampleAPI.jmx -Jpath=api/users?page=1 -Jduration=110 -Jusers=10 -Jrampup=10 -l ./SampleAPIjtl{2024}.jtl
       
    # Upload the Jmeter results    
     - name: Upload Results
       uses: actions/upload-artifact@v4
       with:
         name: jmeter-results
-        path: SampleAPIjtl.jtl
+        path: SampleAPIjtl{2024}.jtl
         if-no-files-found: error
     # Generate an HTML Report    
     - name: Run JMeter Tests
@@ -66,21 +66,21 @@ jobs:
         run: ls -la
         if-no-files-found: error
 
-    - name: Configure AWS credentials login
-      uses: aws-actions/configure-aws-credentials@v4
-      with:
-        role-to-assume: arn:aws:iam::739275441922:role/Suhas-OIDC
-        aws-region: us-east-1
+    # - name: Configure AWS credentials login
+    #   uses: aws-actions/configure-aws-credentials@v4
+    #   with:
+    #     role-to-assume: arn:aws:iam::739275441922:role/Suhas-OIDC
+    #     aws-region: us-east-1
 
     - name: Github token
       run: echo "MY_GITHUB_TOKEN=${{ secrets.MY_GITHUB_TOKEN }}" >> $GITHUB_ENV
   # Run python script to convert .json to .csv
-    # - name: Run python script
-    #   run: |
-    #    python3 python.py
-
-    # Run python script to compare results
     - name: Run python script
       run: |
-       python3 comparision-updated.py
+       python3 python.py
+
+    # Run python script to compare results
+    # - name: Run python script
+    #   run: |
+    #    python3 comparision-updated.py
   

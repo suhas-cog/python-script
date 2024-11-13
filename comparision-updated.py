@@ -149,3 +149,8 @@ output.seek(0)
 
 # Upload the Excel file to S3
 s3.put_object(Bucket=bucket_name, Key=output_key, Body=output.getvalue())
+
+
+#share the output to sharepoint 
+#sharepoint URL
+#sharepoint API key
