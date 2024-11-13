@@ -74,6 +74,7 @@ jobs:
 
     - name: Github token
       run: echo "MY_GITHUB_TOKEN=${{ secrets.MY_GITHUB_TOKEN }}" >> $GITHUB_ENV
+      
   # Run python script to convert .json to .csv
     - name: Run python script
       run: |
