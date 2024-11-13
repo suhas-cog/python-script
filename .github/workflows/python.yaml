@@ -47,7 +47,7 @@ jobs:
     - name: Run JMeter Tests
       run: |
        ls
-       jmeter -Jjmeter.reportgenerator.exporter.html.series_filter="((T[0-9] {1,3}_))" -g ./SampleAPIjtl.jtl -o ./HTMLReport
+       jmeter -Jjmeter.reportgenerator.exporter.html.series_filter="((T[0-9] {1,3}_))" -g ./SampleAPIjtl{2024}.jtl -o ./HTMLReport
 #filtered 
   # upload the HTML Reports    
     - name: Upload HTML Reports
