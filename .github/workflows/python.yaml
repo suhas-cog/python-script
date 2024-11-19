@@ -35,6 +35,7 @@ jobs:
       run: |
        ls
        jmeter -n -t ./SampleAPI.jmx -Jpath=api/users?page=1 -Jduration=110 -Jusers=10 -Jrampup=10 -l ./SampleAPIjtl{2024}.jtl
+       #jmeter -n -t ${jmx-directory/scriptname} -Host ${Host} -USERID ${USERID} -Password ${Password} -Protocol ${Protocol} -threads ${threads} -rampup ${rampup} -Duration ${Duration} -Port ${Port} -testid ${testid} -CMIP ${CMIP} -DETA_OR_IDT_CLOUD ${DETA_OR_IDT_CLOUD}
       
    # Upload the Jmeter results    
     - name: Upload Results
