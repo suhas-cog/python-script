@@ -1,7 +1,9 @@
 
 name: Check Runner Status
 
-on: [push]
+on: 
+  #push:
+  workflow_dispatch:
 
 env:
   GITHUB: "${{secrets.PAT}}"
