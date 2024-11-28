@@ -4,7 +4,7 @@ name: Check Runner Status
 on: [push]
 
 env:
-  GITHUB: "${{secrets.GH_TOKEN}}"
+  GITHUB: "${{secrets.PAT}}"
  
 jobs:
   check-runner:
@@ -25,6 +25,6 @@ jobs:
 
       - name: Check runner status
         env:
-          GITHUB: "${{secrets.GH_TOKEN}}"
+          GITHUB: "${{secrets.PAT}}"
         run: |
           python check-runner-status.py
